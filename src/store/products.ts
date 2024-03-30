@@ -50,4 +50,5 @@ export const useProductStore = defineStore({
           console.error('Error fetching products:', error);
           // Optionally, set an error state in your store
         }
-  };
+  }
+}
