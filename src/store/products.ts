@@ -36,20 +36,18 @@ export const useProductStore = defineStore({
   actions: {
 
 
+async fetchAll() {
+  if (this.loaded) return;
 
-
-    
-
-    
-    async fetchAll() {
-      if (this.loaded) return;
-
-      const res = await axios.get("products.json"); 
-      const data: Product[] = await res.json();
-      this.ids = data.map((product) => {
-        this.items[product.id] = product;
-        return product.id;
-      });
-    },
-  },
+  try {
+    const res = await axios.get('products.json'); 
+    const data: Product[] = res.data; // Access the JSON within the 'data' property
+    this.ids = data.map((product) => {
+      this.items[product.id] = product;
+      return product.id;
+    });
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    // Optionally, set an error state in your store
+  }
 });
