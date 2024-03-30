@@ -34,10 +34,17 @@ export const useProductStore = defineStore({
   },
 
   actions: {
+
+
+
+
+    
+
+    
     async fetchAll() {
       if (this.loaded) return;
 
-      const res = await axios.get('products.json'); 
+      const res = await axios.get("products.json"); 
       const data: Product[] = await res.json();
       this.ids = data.map((product) => {
         this.items[product.id] = product;
