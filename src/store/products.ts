@@ -11,8 +11,8 @@ export interface Product {
 }
 
 interface ProductState {
-  items: Record<string, Product>;
-  ids: number[];
+  items: Record<string, Product>,
+  ids: number[],
 }
 
 export const useProductStore = defineStore({
