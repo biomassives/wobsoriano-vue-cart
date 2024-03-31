@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import axios from 'axios';
 
 export interface Product {
-  id: number;
+  id: [];
   title: string;
   price: number;
   description: string;
@@ -12,8 +12,9 @@ export interface Product {
     rate: number;
     count: number;
   };
-  sizes?: string[];
-  colors?: string[];
+  option1: string;
+  option2: string;
+  option3: string;
 }
 
 interface ProductState {
