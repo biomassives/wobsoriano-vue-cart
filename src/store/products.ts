@@ -1,6 +1,14 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 
+
+// In your products.ts file
+interface ProductStore {
+   // ... other store properties
+   items: Record<number, Product>;
+}
+
+
 export interface Product {
   id: number;
   title: string;
@@ -16,6 +24,7 @@ export interface Product {
   prodopt2: string;
   prodopt3: string;
 }
+
 
 interface ProductState {
   items: Record<number, Product>;
@@ -45,6 +54,7 @@ export const useProductStore = defineStore('products', {
   actions: {
     async fetchAll() {
       // Early return if products are already loaded
+      console.log('got here ');
       if (this.loaded) return;
 
       try {
