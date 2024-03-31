@@ -48,6 +48,10 @@ const product = computed<Product | undefined>(() => productStore.items[productId
         <p class="mt-4 text-lg">
           {{ toCurrency(product.price) }}
         </p>
+        
+        <p class="mt-4 text-lg"> Product options placeholder
+        </p>
+        
         <div class="card-actions">
           <button class="btn btn-primary" @click="cartStore.add(product.id)">
             Add to Cart
