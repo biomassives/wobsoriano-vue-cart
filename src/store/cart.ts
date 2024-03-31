@@ -24,9 +24,9 @@ export interface CartPreview {
   id: number
   image: string
   title: string
-  option1: string
-  option2: string
-  option3: string
+  prodopt1: string
+  prodopt2: string
+  prodopt3: string
   quantity: number
   cost: number
 }
