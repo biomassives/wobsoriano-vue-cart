@@ -26,6 +26,19 @@ const cartStore = useCartStore()
         </router-link>
       </h2>
       <p>{{ toCurrency(product.price) }}</p>
+
+      <Carousel class="rounded-box">
+        <CarouselItem>
+          <img src="https://api.lorem.space/image/burger?w=400&h=300&hash=8B7BCDC2" alt="Burger">
+        </CarouselItem>
+      
+        <CarouselItem>
+          <img src="https://api.lorem.space/image/burger?w=400&h=300&hash=500B67FB" alt="Burger">
+        </CarouselItem>
+      </Carousel>
+      
+
+      
       <div class="justify-end card-actions">
         <button class="btn btn-primary" @click="cartStore.add(product.id)">
           Add to Cart
