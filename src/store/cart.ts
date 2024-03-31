@@ -24,6 +24,9 @@ export interface CartPreview {
   id: number
   image: string
   title: string
+  option1: string
+  option2: string
+  option3: string
   quantity: number
   cost: number
 }
@@ -63,6 +66,9 @@ export const useCartStore = defineStore({
           id: purchase.productId,
           image: product?.image || '',
           title: product?.title || '',
+          option1: product?.option1 || '',
+          option2: product?.option2 || '',
+          option3: product?.option3 || '',
           quantity: purchase.quantity,
           cost: purchase.quantity * (product?.price || 0),
         };
