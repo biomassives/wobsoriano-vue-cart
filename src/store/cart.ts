@@ -66,9 +66,9 @@ export const useCartStore = defineStore({
           id: purchase.productId,
           image: product?.image || '',
           title: product?.title || '',
-          option1: product?.option1 || '',
-          option2: product?.option2 || '',
-          option3: product?.option3 || '',
+          prodopt1: product?.prodopt1 || '',
+          prodopt2: product?.prodopt2 || '',
+          prodopt3: product?.prodopt3 || '',
           quantity: purchase.quantity,
           cost: purchase.quantity * (product?.price || 0),
         };
@@ -86,6 +86,7 @@ export const useCartStore = defineStore({
           quantity: 1,
         };
       }
+      
       // Persist the updated contents to localStorage
       this.persistCart();
     },
@@ -107,5 +108,6 @@ export const useCartStore = defineStore({
     persistCart() {
       localStorage.setItem(CART_STORAGE, JSON.stringify(this.contents));
     },
+    
   },
 });
