@@ -1,0 +1,13 @@
+[
+  {
+    "image": "path/to/image1.jpg",
+    "caption": "Slide 1 Caption",
+    "link": "https://example.com/slide1"
+  },
+  {
+    "image": "path/to/image2.jpg",
+    "caption": "Slide 2 Caption",
+    "link": "https://example.com/slide2" 
+  },
+  ... // Add more slide objects
+]
