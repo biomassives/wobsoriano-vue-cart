@@ -53,6 +53,8 @@ export const useProductStore = defineStore('products', {
 
   actions: {
     async fetchAll() {
+
+       
       // Early return if products are already loaded
       console.log('got here ');
       if (this.loaded) return;
@@ -67,8 +69,6 @@ export const useProductStore = defineStore('products', {
           acc[product.id] = product;
           return acc;
         }, {});
-
-        // Mark as loaded
         this.loaded = true;
       } catch (error) {
         console.error('Error fetching products:', error);
