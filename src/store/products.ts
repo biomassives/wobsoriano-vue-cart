@@ -47,7 +47,7 @@ export const useProductStore = defineStore('products', {
       if (this.loaded) return;
 
       try {
-        const response = await axios.get('/path/to/your/products.json');
+        const response = await axios.get('products.json');
         const products: Product[] = response.data;
         
         // Populate the store
