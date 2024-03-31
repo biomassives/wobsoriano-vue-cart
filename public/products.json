@@ -12,7 +12,8 @@
     },
     "prodopt1": ["Small", "Medium", "Large"],
     "prodopt2": ["Black", "Blue"],
-    "prodopt3": ["14 mm shank", "16 mm shank"]
+    "prodopt3": ["14 mm shank", "16 mm shank"],
+    "prodopt4": ["10 cc", "13 cc"]
   },
   {
     "id": 2,
@@ -78,7 +79,7 @@
    
    },
    
-   {"id":7,"title":"White Gold Plated Princess","price":9.99,"description":"Classic Created Wedding Engagement Solitaire Diamond Promise Ring for Her. Gifts to spoil your love more for Engagement, Wedding, Anniversary, Valentine's Day...","category":"jewelery","image":"https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg","rating":{"rate":3,"count":400}
+   {"id":7,"title":"White Gold Plated Princess","price":9.99,"description":"Classic Created Wedding Engagement Solitaire Diamond Promise Ring for Her. Gifts to spoil your love more for Engagement, Wedding, Anniversary, Valentine's Day...","category":"jewelery","image":"https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg","rating":{"rate":3,"count":400},
      "prodopt1": ["Small", "Medium", "Large"],
      "prodopt2": ["Black", "Blue"],
      "prodopt3": ["12 mm on center", "15 mm on center"]
