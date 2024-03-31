@@ -1,22 +1,23 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { computed, ref } from 'vue';
+import { useRoute } from 'vue-router';
 
-import { useCartStore } from '@/store/cart'
-import { useProductStore } from '@/store/products'
-import type { Product } from '@/store/products'
-import { toCurrency } from '@/shared/utils'
+import { useCartStore } from '@/store/cart';
+import { useProductStore } from '@/store/products';
+import type { Product } from '@/store/products';
+import { toCurrency } from '@/shared/utils';
 
-import CartCardSkeleton from '@/components/CartCardSkeleton.vue'
+import CartCardSkeleton from '@/components/CartCardSkeleton.vue';
 
-const cartStore = useCartStore()
-const productStore = useProductStore()
+const cartStore = useCartStore();
+const productStore = useProductStore();
+const route = useRoute();
 
-const route = useRoute()
+// Convert the route parameter 'productId' to a number
+const productId = Number(route.params.productId);
+const product = computed<Product | undefined>(() => productStore.items[productId]);
 
-const product = computed<Product>(
-  () => productStore.items[route.params.productId as string],
-)
+
 </script>
 
 <template>
