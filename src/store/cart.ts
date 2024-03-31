@@ -7,8 +7,17 @@ export interface Purchase {
   quantity: number
 }
 
+// Assuming CartItem has the same structure as Purchase for now
+// Adjust this interface to match your actual CartItem structure
+export interface CartItem {
+  productId: number
+  quantity: number
+}
+
 interface CartState {
-  contents: Record<string, Purchase>
+  // Make sure to use the correct type for contents
+  // Use number as key if you're indexing by the productId which is a number
+  contents: Record<number, Purchase>
 }
 
 export interface CartPreview {
@@ -23,63 +32,74 @@ export const useCartStore = defineStore({
   id: 'cart',
 
   state: (): CartState => ({
-    contents: JSON.parse(localStorage.getItem(CART_STORAGE) as string) ?? {},
+    // Parse the localStorage value safely by ensuring the parsed result is of the correct type
+    contents: JSON.parse(localStorage.getItem(CART_STORAGE) || '{}') as Record<number, Purchase>,
   }),
 
   getters: {
-    count(): number {
-      return Object.keys(this.contents).reduce((acc, id) => {
-        return acc + this.contents[id].quantity
-      }, 0)
+    count(state): number {
+      return Object.values(state.contents).reduce((acc, purchase) => {
+        return acc + purchase.quantity;
+      }, 0);
     },
 
-    total(): number {
-      const products = useProductStore()
-      return Object.keys(this.contents).reduce((acc, id) => {
-        return acc + products.items[id].price * this.contents[id].quantity
-      }, 0)
+    total(state): number {
+      const products = useProductStore();
+      return Object.values(state.contents).reduce((acc, purchase) => {
+        const product = products.items[purchase.productId];
+        return acc + (product?.price || 0) * purchase.quantity;
+      }, 0);
     },
 
-    formattedCart(): CartPreview[] {
-      const products = useProductStore()
+    formattedCart(state): CartPreview[] {
+      const products = useProductStore();
 
       if (!products.loaded)
-        return []
+        return [];
 
-      return Object.keys(this.contents).map((productId) => {
-        const purchase = this.contents[productId]
-
+      return Object.values(state.contents).map((purchase) => {
+        const product = products.items[purchase.productId];
         return {
           id: purchase.productId,
-          image: products.items[purchase.productId].image,
-          title: products.items[purchase.productId].title,
+          image: product?.image || '',
+          title: product?.title || '',
           quantity: purchase.quantity,
-          cost: purchase.quantity * products.items[purchase.productId].price,
-        }
-      })
+          cost: purchase.quantity * (product?.price || 0),
+        };
+      });
     },
   },
 
   actions: {
     add(productId: number) {
       if (this.contents[productId]) {
-        this.contents[productId].quantity += 1
-      }
-      else {
+        this.contents[productId].quantity += 1;
+      } else {
         this.contents[productId] = {
           productId,
           quantity: 1,
-        }
+        };
       }
+      // Persist the updated contents to localStorage
+      this.persistCart();
     },
+    
     remove(productId: number) {
       if (!this.contents[productId])
-        return
+        return;
 
-      this.contents[productId].quantity -= 1
+      this.contents[productId].quantity -= 1;
 
-      if (this.contents[productId].quantity === 0)
-        delete this.contents[productId]
+      if (this.contents[productId].quantity <= 0) {
+        delete this.contents[productId];
+      }
+      // Persist the updated contents to localStorage
+      this.persistCart();
+    },
+    
+    // Save the current state of the cart to localStorage
+    persistCart() {
+      localStorage.setItem(CART_STORAGE, JSON.stringify(this.contents));
     },
   },
-})
+});
