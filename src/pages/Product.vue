@@ -34,6 +34,15 @@ const product = computed<Product>(
       </figure>
       <div class="card-body">
         <h2 class="card-title" v-text="product.title" />
+
+        <div v-if="!productStore.loaded" class="loading">
+          Loading product details...
+        </div>
+        <div v-else class="text-error">
+          No product found with the provided ID. <a href="/products">Return to products list.</a>
+        </div>
+
+        
         <p v-text="product.description" />
         <p class="mt-4 text-lg">
           {{ toCurrency(product.price) }}
@@ -43,6 +52,12 @@ const product = computed<Product>(
             Add to Cart
           </button>
         </div>
+        <div v-if="productStore.error" class="text-error">
+          Error loading products: {{ productStore.error }}
+        </div>
+        
+        
+        
       </div>
     </div>
     <div v-else>
